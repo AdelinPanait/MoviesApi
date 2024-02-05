@@ -5,7 +5,12 @@ import java.util.List;
 
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,10 +35,19 @@ public class Movie {
     private String trailerLink;
     private  String poster;
 
+
+    @ElementCollection
+    @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "imdbId"))
+    @Column(name = "genre")
     private List<String> genres;
+
+    @ElementCollection
+    @CollectionTable(name = "movie_backdrops", joinColumns = @JoinColumn(name = "imdbId"))
+    @Column(name = "backdrop")
     private List<String> backdrops;
     
-
+    @OneToMany(mappedBy = "movie")
+    private List<Review> reviews;
    
 
     

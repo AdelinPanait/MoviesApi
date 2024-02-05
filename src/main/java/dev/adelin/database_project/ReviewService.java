@@ -13,7 +13,7 @@ public interface ReviewService {
 
   List<Review>findallreview();
     Optional<Review> findbyid(Long Id);
-    Review savereview(Review review);
+    Review savereview(Review review,Movie movie);
     Review updatereview(Review review);
     void deletereview(Long id);
    

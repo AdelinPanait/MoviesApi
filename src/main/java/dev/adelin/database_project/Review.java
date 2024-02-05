@@ -1,10 +1,13 @@
 package dev.adelin.database_project;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +26,9 @@ public class Review {
     private String username;
     private float score;
     private String body;
-    
-    
+
+    @ManyToOne
+    @JsonIgnore
+    private Movie movie;
     
 }

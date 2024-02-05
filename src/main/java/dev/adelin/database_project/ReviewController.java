@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
+
+    @Autowired
+    private MovieService movieService;
+    
      @GetMapping("/get")
     public List<Review> findallreview()
     {
@@ -36,10 +40,11 @@ public class ReviewController {
         return reviewService.findbyid(id);
     }
 
-    @PostMapping("/add")
-    public Review savReview(@RequestBody Review review)
-    {
-        return reviewService.savereview(review);
+    @PostMapping("/add/{movieId}")
+    public Review savReview(@RequestBody Review review,@PathVariable Long movieId)
+    {   
+        Movie movie= movieService.findbyid(movieId).orElseThrow(()->new RuntimeException("Movie not found"));
+        return reviewService.savereview(review,movie);
     }
 
     
