@@ -31,9 +31,10 @@ public class ReviewServiceImplementation implements ReviewService{
         }
 
         @Override
-        public Review savereview(Review review) {
-            if(review!=null)
-           return reviewRepository.save(review);
+        public Review savereview(Review review,Movie movie) {
+            if(review!=null && movie!=null){
+                review.setMovie(movie);
+           return reviewRepository.save(review);}
              return null;
         }
 
